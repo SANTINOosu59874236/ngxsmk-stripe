@@ -1,0 +1,21 @@
+<h1>ngxsmk-stripe Demo</h1>
+
+<h2>One-time Payment</h2>
+<ngxsmk-stripe-payment
+  [publicKey]="publicKey"
+  [clientSecret]="paymentClientSecret"
+  [returnUrl]="returnUrl"
+  [appearance]="appearance"
+  (paymentSuccess)="onPaymentSuccess($event)"
+  (paymentError)="onPaymentError($event)">
+</ngxsmk-stripe-payment>
+
+<h2>Subscription</h2>
+<ngxsmk-stripe-subscription
+  [publicKey]="publicKey"
+  [clientSecret]="subscriptionClientSecret"
+  [returnUrl]="returnUrl"
+  [appearance]="appearance"
+  (subscriptionSuccess)="onSubSuccess($event)"
+  (subscriptionError)="onSubError($event)">
+</ngxsmk-stripe-subscription>

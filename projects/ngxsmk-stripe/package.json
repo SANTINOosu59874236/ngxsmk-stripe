@@ -1,0 +1,44 @@
+{
+  "name": "ngxsmk-stripe",
+  "version": "1.0.0",
+  "description": "Angular Stripe Payment plugin with SCSS theme support",
+  "author": "Sachin Dilshan",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "stripe",
+    "stripe payments",
+    "stripe checkout",
+    "stripe elements",
+    "payment gateway",
+    "subscription",
+    "recurring billing",
+    "checkout",
+    "credit card",
+    "angular stripe",
+    "angular payments",
+    "ngx",
+    "ngx library",
+    "angular plugin",
+    "angular component",
+    "angular stripe integration",
+    "ecommerce",
+    "saas",
+    "online payments",
+    "secure payments",
+    "payment integration"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toozuuu/ngxsmk-stripe.git"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=17.0.0",
+    "@angular/core": ">=17.0.0",
+    "@stripe/stripe-js": "^4.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
